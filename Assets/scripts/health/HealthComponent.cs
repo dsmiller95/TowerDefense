@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 
-public class HealthComponent : MonoBehaviour
+public class HealthComponent : MonoBehaviour, IHealthy
 {
     public float health;
 
