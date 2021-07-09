@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(PointTowardsComponent))]
 public class MortarTurretController : MonoBehaviour
 {
     public LayerMask bulletBlockers;
 
+    public float secondsPerBullet;
+    public PointTowardsComponent bulletPrefab;
+
+
+    private float lastFiringTime = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +20,16 @@ public class MortarTurretController : MonoBehaviour
     }
 
     private void Update()
+    {
+        this.GetComponent<PointTowardsComponent>().target = this.PickTarget();
+        if(lastFiringTime + secondsPerBullet < Time.time)
+        {
+            lastFiringTime = Time.time;
+            this.FireBullet();
+        }
+    }
+
+    private GameObject PickTarget()
     {
         IEnumerable<EnemyComponent> targets = GameObject.FindObjectsOfType<EnemyComponent>();
         targets = targets.OrderBy(x => Vector3.Distance(transform.position, x.transform.position));
@@ -31,23 +47,28 @@ public class MortarTurretController : MonoBehaviour
                 {
                     validEnemy = hitEnemy;
                     break;
-                } else
+                }
+                else
                 {
                     Debug.Log($"Could not raycast to {nextTarget}");
                 }
             }
         }
 
-        if(validEnemy == null)
+        return validEnemy?.gameObject;
+    }
+
+    private void FireBullet()
+    {
+        var target = this.GetComponent<PointTowardsComponent>().target;
+        if(target == null)
         {
             return;
         }
 
-        this.AimtAt(validEnemy.gameObject);
-    }
+        var newBullet = Instantiate(bulletPrefab);
+        newBullet.target = target;
 
-    private void AimtAt(GameObject target)
-    {
-        transform.LookAt(target.transform, Vector3.up);
+        newBullet.transform.position = this.transform.position;
     }
 }
