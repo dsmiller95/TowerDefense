@@ -1302,7 +1302,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnedPrefab: {fileID: 2542344247395608582, guid: 96b42fabcf254e646bfcd17bb4256639, type: 3}
   spawnVolume: {x: 10, y: 0.01, z: 1}
-  secondsPerSpawn: 2
+  spawnFrequency:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.044502646
+      value: 0.20443013
+      inSlope: 0.08885113
+      outSlope: 0.08885113
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07998418
+    - serializedVersion: 3
+      time: 120.00705
+      value: 5.0036316
+      inSlope: 0.004703503
+      outSlope: 0.004703503
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09322288
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &1817912057
 Transform:
   m_ObjectHideFlags: 0
