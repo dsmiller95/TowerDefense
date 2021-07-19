@@ -19,4 +19,13 @@ public class FloatVariable : ScriptableObject
     }
     public event Action onValueChanged;
 
+    public void SetValue(float value)
+    {
+        this.Value = value;
+    }
+
+    public void AddValue(float value)
+    {
+        this.Value += value;
+    }
 }
