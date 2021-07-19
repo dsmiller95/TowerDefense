@@ -10,7 +10,7 @@ public class PlaceAtCursorComponent : MonoBehaviour
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if(!Physics.Raycast(ray, out var raycastHit, validPlacementSurfaces))
+        if(!Physics.Raycast(ray, out var raycastHit, 100, validPlacementSurfaces))
         {
             // there is no placement site under the cursor
             enableWhenValidPlacement.SetActive(false);
