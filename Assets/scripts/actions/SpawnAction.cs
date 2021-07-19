@@ -5,8 +5,15 @@ public class SpawnAction : MonoBehaviour
 {
     public GameObject prefab;
 
-    public void SpawnPrefab()
+    public FloatVariable spawnResource;
+    public float spawnCost;
+
+    public void TrySpawnPrefab()
     {
-        GameObject.Instantiate(prefab); 
+        if(spawnResource.Value >= spawnCost)
+        {
+            spawnResource.AddValue(-spawnCost);
+            GameObject.Instantiate(prefab);
+        }
     }
 }
