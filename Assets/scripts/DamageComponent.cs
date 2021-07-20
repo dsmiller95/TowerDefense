@@ -14,7 +14,7 @@ public class DamageComponent : MonoBehaviour
         if (((1 << other.gameObject.layer) & damageTarget) != 0)
         {
             // layer of trigger enter is included in the damager layer mask
-            var targetHealth = other.gameObject.GetComponentInParent<HealthComponent>();
+            var targetHealth = other.gameObject.GetComponentInParent<IHealthy>();
             targetHealth?.DamageHealth(damage);
             Destroy(this.gameObject);
         }
