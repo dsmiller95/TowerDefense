@@ -9,6 +9,6 @@ public class EnemyComponent : MonoBehaviour
     {
         // moving the component must happen in FixedUpdate, so the physics system has time to update
         //  otherwise, the collider position will no longer be in sync with the actual transform position
-        transform.position += Vector3.forward * Time.deltaTime;
+        transform.position += Vector3.forward * Time.fixedDeltaTime;
     }
 }
